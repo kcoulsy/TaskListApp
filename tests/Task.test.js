@@ -1,5 +1,6 @@
 const expect = require('expect');
 const request = require('supertest');
+const { ObjectID } = require('mongodb');
 const {
   app,
 } = require('./../server');
@@ -8,9 +9,11 @@ const {
 } = require('./../Models/Task');
 
 const testTasks = [{
+  _id: new ObjectID(),
   title: 'This is the first task',
 },
 {
+  _id: new ObjectID(),
   title: 'This is the second task',
 }];
 
@@ -58,7 +61,7 @@ describe('POST /task', () => {
 });
 
 
-describe('GET /task', () => {
+describe('GET /tasks', () => {
   it('should get all tasks', (done) => {
     request(app)
       .get('/tasks')
@@ -66,6 +69,36 @@ describe('GET /task', () => {
       .expect((res) => {
         expect(res.body.tasks.length).toBe(2);
       })
+      .end(done);
+  });
+});
+
+describe('GET /tasks/:id', () => {
+  it('should get task by id and return the task', (done) => {
+    request(app)
+      .get(`/tasks/${testTasks[0]._id.toHexString()}`)
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.task.title).toBe(testTasks[0].title);
+      })
+      .end(done);
+  });
+
+  it('should return a 404 if the id is invalid', (done) => {
+    const newID = `${new ObjectID()}randomString1234`;
+
+    request(app)
+      .get(`/tasks/${newID}`)
+      .expect(404)
+      .end(done);
+  });
+
+  it('should return at 404 if no task is found', (done) => {
+    const newID = new ObjectID();
+
+    request(app)
+      .get(`/tasks/${newID}`)
+      .expect(404)
       .end(done);
   });
 });
