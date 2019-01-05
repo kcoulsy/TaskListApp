@@ -34,3 +34,19 @@ exports.findById = (req, res) => {
     res.status(400).send();
   });
 };
+
+exports.delete = (req, res) => {
+  const { id } = req.params;
+
+  if (!ObjectID.isValid(id)) {
+    return res.sendStatus(404);
+  }
+  Task.findOneAndDelete(id).then((task) => {
+    if (!task) {
+      res.sendStatus(404);
+    }
+    res.send({ task });
+  }).catch((error) => {
+    res.status(400).send();
+  });
+};
