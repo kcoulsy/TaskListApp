@@ -5,6 +5,7 @@ module.exports = {
         "no-console": "off",
         "no-undef": "off",
         "consistent-return": "off",
-        "no-trailing-spaces": "off"
+        "no-trailing-spaces": "off",
+        "no-underscore-dangle": "off"
     }
 };
