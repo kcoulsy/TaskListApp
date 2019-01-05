@@ -9,3 +9,11 @@ exports.create = (req, res) => {
     res.status(400).send(error);
   });
 };
+
+exports.find = (req, res) => {
+  Task.find().then((tasks) => {
+    res.send({ tasks });
+  }, (error) => {
+    res.status(400).send(error);
+  });
+};
