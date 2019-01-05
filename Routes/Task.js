@@ -1,3 +1,4 @@
+const { ObjectID } = require('mongodb');
 const { Task } = require('./../Models/Task');
 
 exports.create = (req, res) => {
@@ -16,4 +17,21 @@ exports.find = (req, res) => {
   }, (error) => {
     res.status(400).send(error);
   });
+};
+
+exports.findById = (req, res) => {
+  const { id } = req.params;
+
+  if (!ObjectID.isValid(id)) {
+    return res.sendStatus(404);
+  } else {
+    Task.findById(id).then((task) => {
+      if (!task) {
+        res.sendStatus(404);
+      }
+      res.send({task});
+    }).catch((error) => {
+      res.status(400).send();
+    });
+  }
 };
