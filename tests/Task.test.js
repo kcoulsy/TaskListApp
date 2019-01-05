@@ -7,8 +7,15 @@ const {
   Task,
 } = require('./../Models/Task');
 
+const testTasks = [{
+  title: 'This is the first task',
+},
+{
+  title: 'This is the second task',
+}];
+
 beforeEach((done) => {
-  Task.deleteOne({}).then(() => {
+  Task.remove({}).then(() => Task.insertMany(testTasks)).then(() => {
     done();
   });
 });
@@ -26,7 +33,7 @@ describe('POST /task', () => {
       .end((err, res) => {
         if (err) return done(err);
 
-        Task.find().then((tasks) => {
+        Task.find({ title }).then((tasks) => {
           expect(tasks.length).toBe(1);
           expect(tasks[0].title).toBe(title);
           done();
@@ -43,9 +50,22 @@ describe('POST /task', () => {
         if (err) return done(err);
 
         Task.find().then((tasks) => {
-          expect(tasks.length).toBe(0);
+          expect(tasks.length).toBe(2);
           done();
         }).catch(e => done(e));
       });
+  });
+});
+
+
+describe('GET /task', () => {
+  it('should get all tasks', (done) => {
+    request(app)
+      .get('/tasks')
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.tasks.length).toBe(2);
+      })
+      .end(done);
   });
 });
