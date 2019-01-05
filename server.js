@@ -25,3 +25,6 @@ app.listen(PORT, () => {
   console.log(`Console running on port ${PORT}`);
   /* eslint-enable no-console */
 });
+
+
+module.exports = { app };
