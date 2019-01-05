@@ -11,6 +11,10 @@ const {
 const testTasks = [{
   _id: new ObjectID(),
   title: 'This is the first task',
+  description: 'This is the first task description',
+  assignedTo: 'Nobody',
+  complete: true,
+  completedAt: 123,
 },
 {
   _id: new ObjectID(),
@@ -27,9 +31,12 @@ describe('POST /task', () => {
   it('should create a new TODO', (done) => {
     const title = 'Test Title2';
 
-    request(app).post('/task').send({
-      title,
-    }).expect(200)
+    request(app)
+      .post('/task')
+      .send({
+        title,
+      })
+      .expect(200)
       .expect((res) => {
         expect(res.body.title).toBe(title);
       })
@@ -137,6 +144,43 @@ describe('DELETE /tasks/:id', () => {
     request(app)
       .delete(`/tasks/${newID}`)
       .expect(404)
+      .end(done);
+  });
+});
+
+describe('PATCH /tasks/:id', () => {
+  it('should update the task', (done) => {
+    const data = {
+      title: 'Patch test title',
+      description: 'Patch test description',
+      complete: true,
+      assignedTo: 'Somebody',
+    };
+
+    request(app)
+      .patch(`/tasks/${testTasks[0]._id.toHexString()}`)
+      .send(data)
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.task.title).toBe(data.title);
+        expect(res.body.task.description).toBe(data.description);
+        expect(res.body.task.complete).toBe(data.complete);
+        expect(res.body.task.assignedTo).toBe(data.assignedTo);
+        // expect(res.body.task.completedAt).toBeA('number');
+      })
+      .end(done);
+  });
+
+  it('should should clear completedAt when !complete', (done) => {
+    request(app)
+      .patch(`/tasks/${testTasks[0]._id.toHexString()}`)
+      .send({
+        complete: false,
+      })
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.task.completedAt).toBeFalsy();
+      })
       .end(done);
   });
 });

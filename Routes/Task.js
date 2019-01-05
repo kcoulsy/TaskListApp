@@ -75,7 +75,7 @@ exports.update = (req, res) => {
     if (!task) {
       res.status(404).send();
     }
-    res.send(task);
+    res.send({ task });
   }).catch((error) => {
     res.status(400).send();
   });
