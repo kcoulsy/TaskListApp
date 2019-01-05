@@ -24,14 +24,13 @@ exports.findById = (req, res) => {
 
   if (!ObjectID.isValid(id)) {
     return res.sendStatus(404);
-  } else {
-    Task.findById(id).then((task) => {
-      if (!task) {
-        res.sendStatus(404);
-      }
-      res.send({task});
-    }).catch((error) => {
-      res.status(400).send();
-    });
-  }
+  } 
+  Task.findById(id).then((task) => {
+    if (!task) {
+      res.sendStatus(404);
+    }
+    res.send({ task });
+  }).catch((error) => {
+    res.status(400).send();
+  });
 };
