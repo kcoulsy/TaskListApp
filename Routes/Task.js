@@ -1,3 +1,6 @@
+const isBoolean = require('lodash/isBoolean');
+const pick = require('lodash/pick');
+
 const { ObjectID } = require('mongodb');
 const { Task } = require('./../Models/Task');
 
@@ -25,6 +28,7 @@ exports.findById = (req, res) => {
   if (!ObjectID.isValid(id)) {
     return res.sendStatus(404);
   } 
+
   Task.findById(id).then((task) => {
     if (!task) {
       res.sendStatus(404);
@@ -41,11 +45,37 @@ exports.delete = (req, res) => {
   if (!ObjectID.isValid(id)) {
     return res.status(404).send();
   }
+
   Task.findOneAndDelete({ _id: id }).then((task) => {
     if (!task) {
       res.status(404).send();
     }
     res.send({ task });
+  }).catch((error) => {
+    res.status(400).send();
+  });
+};
+
+exports.update = (req, res) => {
+  const { id } = req.params;
+  const body = pick(req.body, ['title', 'description', 'assignedTo', 'complete']);
+
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  if (isBoolean(body.complete) && body.complete) {
+    body.completedAt = new Date().getTime();
+  } else {
+    body.completedAt = null;
+    body.complete = false;
+  }
+
+  Task.findOneAndUpdate({ _id: id }, { $set: body }, { new: true }).then((task) => {
+    if (!task) {
+      res.status(404).send();
+    }
+    res.send(task);
   }).catch((error) => {
     res.status(400).send();
   });
