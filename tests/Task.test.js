@@ -102,3 +102,41 @@ describe('GET /tasks/:id', () => {
       .end(done);
   });
 });
+
+describe('DELETE /tasks/:id', () => {
+  it('should remove a task', (done) => {
+    const id = testTasks[0]._id.toHexString();
+    request(app)
+      .delete(`/tasks/${id}`)
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.task._id).toBe(id);
+      })
+      .end((err, res) => {
+        if (err) return done(err);
+
+        Task.findById(id).then((task) => {
+          expect(task).toBeFalsy();
+          done();
+        }).catch(error => done(error));
+      });
+  });
+
+  it('should return a 404 if the id is invalid', (done) => {
+    const newID = `${new ObjectID()}randomString1234`;
+
+    request(app)
+      .delete(`/tasks/${newID}`)
+      .expect(404)
+      .end(done);
+  });
+
+  it('should return at 404 if no task is found', (done) => {
+    const newID = new ObjectID();
+
+    request(app)
+      .delete(`/tasks/${newID}`)
+      .expect(404)
+      .end(done);
+  });
+});

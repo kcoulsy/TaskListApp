@@ -39,11 +39,11 @@ exports.delete = (req, res) => {
   const { id } = req.params;
 
   if (!ObjectID.isValid(id)) {
-    return res.sendStatus(404);
+    return res.status(404).send();
   }
-  Task.findOneAndDelete(id).then((task) => {
+  Task.findOneAndDelete({ _id: id }).then((task) => {
     if (!task) {
-      res.sendStatus(404);
+      res.status(404).send();
     }
     res.send({ task });
   }).catch((error) => {
