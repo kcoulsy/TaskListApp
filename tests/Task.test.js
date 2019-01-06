@@ -7,25 +7,13 @@ const {
 const {
   Task,
 } = require('./../Models/Task');
+const {
+  testTasks,
+  setupTestTasks,
+} = require('./seed');
 
-const testTasks = [{
-  _id: new ObjectID(),
-  title: 'This is the first task',
-  description: 'This is the first task description',
-  assignedTo: 'Nobody',
-  complete: true,
-  completedAt: 123,
-},
-{
-  _id: new ObjectID(),
-  title: 'This is the second task',
-}];
 
-beforeEach((done) => {
-  Task.remove({}).then(() => Task.insertMany(testTasks)).then(() => {
-    done();
-  });
-});
+beforeEach(setupTestTasks);
 
 describe('POST /task', () => {
   it('should create a new TODO', (done) => {
