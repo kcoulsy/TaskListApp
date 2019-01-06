@@ -23,7 +23,40 @@ const setupTestTasks = (done) => {
   });
 };
 
+const testUser1Id = new ObjectID();
+const testUser2Id = new ObjectID();
+
+const testUsers = [{
+  _id: testUser1Id,
+  email: 'testemail1@mail.com',
+  username: 'testuser1',
+  password: 'testuser1pass',
+  tokens: [{
+    type: 'auth',
+    token: jwt.sign({ _id: testUser1Id, type: 'auth' }, 'key').toString(),
+  }],
+}, {
+  _id: testUser2Id,
+  email: 'testemail2@mail.com',
+  username: 'testuser2',
+  password: 'testuser2pass',
+  tokens: [{
+    type: 'auth',
+    token: jwt.sign({ _id: testUser2Id, type: 'auth' }, 'key').toString(),
+  }],
+}];
+
+const setupTestUsers = (done) => {
+  User.deleteMany().then(() => {
+    User.insertMany(testUsers);
+  }).then(() => {
+    done();
+  });
+};
+
 module.exports = {
   testTasks,
   setupTestTasks,
+  testUsers,
+  setupTestUsers,
 };
