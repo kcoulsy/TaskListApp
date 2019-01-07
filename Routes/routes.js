@@ -11,6 +11,6 @@ router.get('/tasks/:id', Task.findById);
 router.delete('/tasks/:id', Task.delete);
 router.patch('/tasks/:id', Task.update);
 
-router.post('/user', User.create);
+router.post('/users', User.create);
 
 module.exports = router;
