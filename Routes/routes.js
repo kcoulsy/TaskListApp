@@ -14,5 +14,6 @@ router.patch('/tasks/:id', Task.update);
 
 router.post('/users', User.create);
 router.get('/user', Authentication, User.find);
+router.post('/user/login', User.login);
 
 module.exports = router;

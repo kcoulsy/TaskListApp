@@ -17,3 +17,13 @@ exports.create = (req, res) => {
 exports.find = (req, res) => {
   res.send(req.user);
 };
+
+exports.login = (req, res) => {
+  const body = pick(req.body, ['username', 'password']);
+
+  User.findByCredentials(body.username, body.password).then((user) => {
+    user.createToken('auth').then((token) => {
+      res.header('x-auth', token).send(user);
+    });
+  }).catch(e => res.status(400).send());
+};
