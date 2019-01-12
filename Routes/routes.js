@@ -2,6 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
+const { Authentication } = require('./../middleware/Authentication');
 const Task = require('./Task');
 const User = require('./User');
 
@@ -12,5 +13,6 @@ router.delete('/tasks/:id', Task.delete);
 router.patch('/tasks/:id', Task.update);
 
 router.post('/users', User.create);
+router.get('/user', Authentication, User.find);
 
 module.exports = router;

@@ -13,3 +13,7 @@ exports.create = (req, res) => {
     res.status(400).send(error);
   });
 };
+
+exports.find = (req, res) => {
+  res.send(req.user);
+};
