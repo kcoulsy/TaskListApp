@@ -4,25 +4,6 @@ const { ObjectID } = require('mongodb');
 const { Task } = require('./../Models/Task');
 const { User } = require('./../Models/User');
 
-const testTasks = [{
-  _id: new ObjectID(),
-  title: 'This is the first task',
-  description: 'This is the first task description',
-  assignedTo: 'Nobody',
-  complete: true,
-  completedAt: 123,
-},
-{
-  _id: new ObjectID(),
-  title: 'This is the second task',
-}];
-
-const setupTestTasks = (done) => {
-  Task.deleteMany({}).then(() => Task.insertMany(testTasks)).then(() => {
-    done();
-  });
-};
-
 const testUser1Id = new ObjectID();
 const testUser2Id = new ObjectID();
 
@@ -45,6 +26,28 @@ const testUsers = [{
     token: jwt.sign({ _id: testUser2Id, type: 'auth' }, 'key').toString(),
   }],
 }];
+
+const testTasks = [{
+  _id: new ObjectID(),
+  title: 'This is the first task',
+  description: 'This is the first task description',
+  assignedTo: null,
+  createdBy: testUser1Id,
+  complete: true,
+  completedAt: 123,
+},
+{
+  _id: new ObjectID(),
+  title: 'This is the second task',
+  createdBy: testUser1Id,
+  assignedTo: testUser2Id,
+}];
+
+const setupTestTasks = (done) => {
+  Task.deleteMany({}).then(() => Task.insertMany(testTasks)).then(() => {
+    done();
+  });
+};
 
 const setupTestUsers = (done) => {
   User.deleteMany().then(() => {

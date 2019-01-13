@@ -9,6 +9,7 @@ const {
 } = require('./../Models/Task');
 const {
   testTasks,
+  testUsers,
   setupTestTasks,
 } = require('./seed');
 
@@ -21,6 +22,7 @@ describe('POST /task', () => {
 
     request(app)
       .post('/task')
+      .set('x-auth', testUsers[0].tokens[0].token)
       .send({
         title,
       })
@@ -42,6 +44,7 @@ describe('POST /task', () => {
   it('should not create a task with invalid body data', (done) => {
     request(app)
       .post('/task')
+      .set('x-auth', testUsers[0].tokens[0].token)
       .send({})
       .expect(400)
       .end((err, res) => {
@@ -52,6 +55,14 @@ describe('POST /task', () => {
           done();
         }).catch(e => done(e));
       });
+  });
+
+  it('should not create a task if not authenticated', (done) => {
+    request(app)
+      .post('/task')
+      .set('x-auth', null)
+      .expect(401)
+      .end(done);
   });
 });
 
@@ -98,11 +109,62 @@ describe('GET /tasks/:id', () => {
   });
 });
 
+describe('PATCH /tasks/:id', () => {
+  it('should update the task', (done) => {
+    const data = {
+      title: 'Patch test title',
+      description: 'Patch test description',
+      complete: true,
+      assignedTo: testUsers[1]._id.toHexString(),
+    };
+
+    request(app)
+      .patch(`/tasks/${testTasks[0]._id.toHexString()}`)
+      .set('x-auth', testUsers[0].tokens[0].token)
+      .send(data)
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.task.title).toBe(data.title);
+        expect(res.body.task.description).toBe(data.description);
+        expect(res.body.task.complete).toBe(data.complete);
+        expect(res.body.task.assignedTo).toBe(data.assignedTo);
+        // expect(res.body.task.completedAt).toBeA('number');
+      })
+      .end(done);
+  });
+
+  it('should should clear completedAt when !complete', (done) => {
+    request(app)
+      .patch(`/tasks/${testTasks[0]._id.toHexString()}`)
+      .set('x-auth', testUsers[0].tokens[0].token)
+      .send({
+        complete: false,
+      })
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.task.completedAt).toBeFalsy();
+      })
+      .end(done);
+  });
+
+  it('should not update if not authenticated', (done) => {
+    request(app)
+      .patch(`/tasks/${testTasks[0]._id.toHexString()}`)
+      .set('x-auth', null)
+      .send({
+        title: 'new title',
+      })
+      .expect(401)
+      .end(done);
+  });
+});
+
 describe('DELETE /tasks/:id', () => {
   it('should remove a task', (done) => {
     const id = testTasks[0]._id.toHexString();
     request(app)
       .delete(`/tasks/${id}`)
+      .set('x-auth', testUsers[0].tokens[0].token)
       .expect(200)
       .expect((res) => {
         expect(res.body.task._id).toBe(id);
@@ -122,6 +184,7 @@ describe('DELETE /tasks/:id', () => {
 
     request(app)
       .delete(`/tasks/${newID}`)
+      .set('x-auth', testUsers[0].tokens[0].token)
       .expect(404)
       .end(done);
   });
@@ -131,44 +194,17 @@ describe('DELETE /tasks/:id', () => {
 
     request(app)
       .delete(`/tasks/${newID}`)
+      .set('x-auth', testUsers[0].tokens[0].token)
       .expect(404)
       .end(done);
   });
-});
 
-describe('PATCH /tasks/:id', () => {
-  it('should update the task', (done) => {
-    const data = {
-      title: 'Patch test title',
-      description: 'Patch test description',
-      complete: true,
-      assignedTo: 'Somebody',
-    };
-
+  it('should not delete if not authenticated', (done) => {
+    const id = testTasks[0]._id.toHexString();
     request(app)
-      .patch(`/tasks/${testTasks[0]._id.toHexString()}`)
-      .send(data)
-      .expect(200)
-      .expect((res) => {
-        expect(res.body.task.title).toBe(data.title);
-        expect(res.body.task.description).toBe(data.description);
-        expect(res.body.task.complete).toBe(data.complete);
-        expect(res.body.task.assignedTo).toBe(data.assignedTo);
-        // expect(res.body.task.completedAt).toBeA('number');
-      })
-      .end(done);
-  });
-
-  it('should should clear completedAt when !complete', (done) => {
-    request(app)
-      .patch(`/tasks/${testTasks[0]._id.toHexString()}`)
-      .send({
-        complete: false,
-      })
-      .expect(200)
-      .expect((res) => {
-        expect(res.body.task.completedAt).toBeFalsy();
-      })
+      .delete(`/tasks/${id}`)
+      .set('x-auth', null)
+      .expect(401)
       .end(done);
   });
 });
