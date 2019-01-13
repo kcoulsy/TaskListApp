@@ -13,7 +13,7 @@ router.delete('/tasks/:id', Task.delete);
 router.patch('/tasks/:id', Task.update);
 
 router.post('/users', User.create);
-router.get('/user', Authentication, User.find);
-router.post('/user/login', User.login);
+router.get('/users/me', Authentication, User.find);
+router.post('/users/login', User.login);
 
 module.exports = router;
