@@ -15,5 +15,6 @@ router.patch('/tasks/:id', Task.update);
 router.post('/users', User.create);
 router.get('/users/me', Authentication, User.find);
 router.post('/users/login', User.login);
+router.delete('/users/me/token', Authentication, User.delete);
 
 module.exports = router;
