@@ -13,10 +13,11 @@ const Task = mongoose.model('Task', {
     maxlength: 200,
   },
   createdBy: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
   },
   assignedTo: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
   },
   complete: {
     type: Boolean,

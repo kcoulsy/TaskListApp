@@ -5,7 +5,11 @@ const { ObjectID } = require('mongodb');
 const { Task } = require('./../Models/Task');
 
 exports.create = (req, res) => {
-  const task = new Task(req.body);
+  const task = new Task({
+    title: req.body.title,
+    description: req.body.description,
+    createdBy: req.user._id,
+  });
 
   task.save().then((doc) => {
     res.send(doc);
@@ -15,7 +19,11 @@ exports.create = (req, res) => {
 };
 
 exports.find = (req, res) => {
-  Task.find().then((tasks) => {
+  let params = null;
+
+  if (req.user) params = { createdBy: req.user._id };
+
+  Task.find(params).then((tasks) => {
     res.send({ tasks });
   }, (error) => {
     res.status(400).send(error);
@@ -46,7 +54,10 @@ exports.delete = (req, res) => {
     return res.status(404).send();
   }
 
-  Task.findOneAndDelete({ _id: id }).then((task) => {
+  Task.findOneAndDelete({
+    _id: id,
+    createdBy: req.user._id,
+  }).then((task) => {
     if (!task) {
       res.status(404).send();
     }
@@ -71,7 +82,10 @@ exports.update = (req, res) => {
     body.complete = false;
   }
 
-  Task.findOneAndUpdate({ _id: id }, { $set: body }, { new: true }).then((task) => {
+  Task.findOneAndUpdate({
+    _id: id,
+    createdBy: req.user._id,
+  }, { $set: body }, { new: true }).then((task) => {
     if (!task) {
       res.status(404).send();
     }
