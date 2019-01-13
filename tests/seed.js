@@ -32,7 +32,7 @@ const testUsers = [{
   username: 'testuser1',
   password: 'testuser1pass',
   tokens: [{
-    type: 'auth',
+    type: 'x-auth',
     token: jwt.sign({ _id: testUser1Id, type: 'auth' }, 'key').toString(),
   }],
 }, {
@@ -41,14 +41,17 @@ const testUsers = [{
   username: 'testuser2',
   password: 'testuser2pass',
   tokens: [{
-    type: 'auth',
+    type: 'x-auth',
     token: jwt.sign({ _id: testUser2Id, type: 'auth' }, 'key').toString(),
   }],
 }];
 
 const setupTestUsers = (done) => {
   User.deleteMany().then(() => {
-    User.insertMany(testUsers);
+    const userOne = new User(testUsers[0]).save();
+    const userTwo = new User(testUsers[1]).save();
+
+    return Promise.all([userOne, userTwo]);
   }).then(() => {
     done();
   });

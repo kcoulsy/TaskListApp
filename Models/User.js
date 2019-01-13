@@ -52,10 +52,10 @@ UserSchema.methods.createToken = function (type) {
     type,
   }, 'key').toString();
 
-  this.tokens = [...this.tokens, {
+  this.tokens = [{
     type,
     token,
-  }];
+  }, ...this.tokens];
 
   return this.save().then(() => token);
 };
@@ -71,7 +71,7 @@ UserSchema.statics.findByToken = function (token) {
 
   return this.findOne({
     _id: decoded._id,
-    'tokens.type': 'auth',
+    'tokens.type': 'x-auth',
     'tokens.token': token,
   });
 };
