@@ -61,7 +61,7 @@ UserSchema.methods.createToken = function (type) {
 };
 
 UserSchema.methods.removeToken = function (token) {
-  return this.update({
+  return this.updateOne({
     $pull: {
       tokens: { token },
     },
