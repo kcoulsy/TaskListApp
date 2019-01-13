@@ -50,7 +50,7 @@ UserSchema.methods.createToken = function (type) {
   const token = jwt.sign({
     _id: this._id.toHexString(),
     type,
-  }, 'key').toString();
+  }, process.env.JWT_SECRET).toString();
 
   this.tokens = [{
     type,
@@ -72,7 +72,7 @@ UserSchema.statics.findByToken = function (token) {
   let decoded;
 
   try {
-    decoded = jwt.verify(token, 'key');
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
   } catch (e) {
     return Promise.reject();
   }
