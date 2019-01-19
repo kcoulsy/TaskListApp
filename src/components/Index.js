@@ -5,7 +5,10 @@ class Index extends Component {
 		this.super(props);
 	}
 	render () {
-		return <div> Hello. { this.props.name }</div>
+		return (<div>
+			<h3>Hello.</h3>
+			<input type="text" placeholder="CJ Patoilo" id="nameField" />
+		</div>)
 	}
 }
 

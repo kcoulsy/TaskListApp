@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import AppRouter from './components/Index';
 import configStore from './store/config';
 
+import '../node_modules/spectre.css/dist/spectre.css';
 const store = configStore();
 
 class App extends Component {
