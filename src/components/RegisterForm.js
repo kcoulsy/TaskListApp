@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import { connect } from 'react-redux';
-import { startLogin } from '../actions/auth';
+import { startRegister } from '../actions/auth';
 
 const Panel = styled.div`
 padding: 24px;
 width: 300px;
-height: 320px;
+height: 370px;
 display: flex;
 flex-direction: column;
 align-items: center;`;
 
-const LoginFormButtons = styled.div`
+const RegisterFormButtons = styled.div`
 display:flex;
 margin-top: 10px;
 justify-content: space-around;
 `;
 
-const LoginFormButton = styled.button`
+const RegisterFormButton = styled.button`
 flex-basis: 45%;`;
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            email: '',
             username: '',
             password: ''
         }
@@ -39,21 +40,29 @@ class LoginForm extends Component {
         });
     }
 
-    handleLogin = (ev) => {
+    handleRegister = (ev) => {
         ev.preventDefault();
         const {
+            email,
             username,
             password
         } = this.state
         //TODO: @validation
-        this.props.startLogin({ username, password })
+        this.props.startRegister({ email, username, password })
     }
 
     render() {
         return (
             <Panel className="panel">
-                <h3> Login </h3>
-                <form className="form-group" onSubmit={this.handleLogin}>
+                <h3> Register </h3>
+                <form className="form-group" onSubmit={this.handleRegister}>
+                    <label className="form-label" htmlFor="emailField">Email</label>
+                    <input type = "text"
+                        name="email"
+                        placeholder="Email"
+                        onChange={this.handleChange}
+                        className="form-input"
+                        id="emailField" />
                     <label className="form-label" htmlFor="usernameField">Username</label>
                     <input type = "text"
                         name="username"
@@ -68,9 +77,9 @@ class LoginForm extends Component {
                         onChange={this.handleChange}
                         className="form-input"
                         id="passwordField" />
-                    <LoginFormButtons>
-                        <LoginFormButton className="btn btn-primary" type="submit">Login</LoginFormButton>
-                    </LoginFormButtons>
+                    <RegisterFormButtons>
+                        <RegisterFormButton className="btn btn-primary" type="submit">Register</RegisterFormButton>
+                    </RegisterFormButtons>
                 </form>
             </Panel>
         )
@@ -78,7 +87,7 @@ class LoginForm extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    startLogin: (data) => dispatch(startLogin(data))
+    startRegister: (data) => dispatch(startRegister(data))
 })
 
-export default connect(undefined, mapDispatchToProps)(LoginForm);
+export default connect(undefined, mapDispatchToProps)(RegisterForm);
