@@ -15,11 +15,17 @@ const NavBar = (props) => (
   <section className="navbar-center">
   </section>
   { props.token ?
-	`Logged in as: ${props.user.username}` :
-  (<section className="navbar-section">
-      <Link to="/login" className="btn btn-link">Login</Link>
-      <Link to="/register" className="btn btn-link">Register</Link>
-    </section>)
+	(
+	<section className="navbar-section">
+		<span>{`Logged in as: ${props.user.username}`}</span>
+		<Link to="/logout" className="btn btn-link">Logout</Link>
+	</section>
+	) : (
+	<section className="navbar-section">
+		<Link to="/login" className="btn btn-link">Login</Link>
+		<Link to="/register" className="btn btn-link">Register</Link>
+	</section>
+	)
 }
 </HeaderBar>
 );
