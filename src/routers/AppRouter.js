@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import RegisterForm from '../components/RegisterForm';
+import Index from '../components/Index';
 
 class AppRouter extends Component {
   render() {
     return (
       <Router>
-        <Route path="/" exact component={RegisterForm} />
+        <Route path="/" exact component={Index} />
       </Router>
     );
   }
