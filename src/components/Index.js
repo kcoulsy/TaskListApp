@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import LoginForm from './LoginForm';
+import NavBar from './NavBar';
 
 class Index extends Component {
 	constructor(props) {
@@ -11,8 +11,8 @@ class Index extends Component {
 	render() {
 		return (
 			<div>
-				{this.props.token ? this.props.token : 'nothing'}
-				<LoginForm />
+				<NavBar />
+				<h3>Home Page</h3>
 			</div>
 		)
 	}
