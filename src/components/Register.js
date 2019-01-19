@@ -1,11 +1,12 @@
 import React from 'react';
 
+import RegisterForm from './RegisterForm';
 import ContainerWithNav from '../containers/ContainerWithNav';
 
-const Dashboard = (props) => (
+const Register = (props) => (
 	<ContainerWithNav>
-		<h3>Dashboard</h3>
+		<RegisterForm />
 	</ContainerWithNav>
 );
 
-export default Dashboard;
+export default Register;

@@ -1,27 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 
-import NavBar from './NavBar';
+import ContainerWithNav from '../containers/ContainerWithNav';
 
-class Index extends Component {
-	constructor(props) {
-		super(props);
-	}
+const Index = (props) => (
+	<ContainerWithNav>
+		<h3>Home Page</h3>
+	</ContainerWithNav>
+);
 
-	render() {
-		return (
-			<div>
-				<NavBar />
-				<h3>Home Page</h3>
-			</div>
-		)
-	}
-}
-
-const mapStateToProps = state => {
-	return {
-		token: state.token
-	}
-}
-
-export default connect(mapStateToProps)(Index);
+export default Index;

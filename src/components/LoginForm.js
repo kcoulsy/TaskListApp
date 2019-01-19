@@ -7,6 +7,8 @@ const Panel = styled.div`
 padding: 24px;
 width: 300px;
 height: 320px;
+margin-left: auto;
+margin-right: auto;
 display: flex;
 flex-direction: column;
 align-items: center;`;
