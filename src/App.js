@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
-import AppRouter from './components/Index';
+import AppRouter from './routers/AppRouter';
 import configStore from './store/config';
 
 import '../node_modules/spectre.css/dist/spectre.css';

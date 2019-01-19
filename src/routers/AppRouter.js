@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Index from './components/Index';
+import LoginForm from '../components/LoginForm';
 
 class AppRouter extends Component {
   render() {
     return (
       <Router>
-        <Route path="/" exact component={Index} />
+        <Route path="/" exact component={LoginForm} />
       </Router>
     );
   }
 }
 
-export default App;
+export default AppRouter;
