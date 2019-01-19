@@ -10,6 +10,11 @@ export default (state = defaultAuthState, action) => {
 				token: action.token,
 				user: action.user
 			}
+		case 'REGISTER':
+			return {
+				token: action.token,
+				user: action.user
+			}
 		default:
 			return state;
 	}
