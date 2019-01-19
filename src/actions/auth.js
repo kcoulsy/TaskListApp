@@ -9,7 +9,6 @@ export const login = (data) => {
 
 export const startLogin = (data) => {
 	return (dispatch) => {
-		// do api call then dispatch
 		axios({
 			method: 'post',
 			url: '/users/login',
@@ -38,7 +37,6 @@ export const register = (data) => {
 
 export const startRegister = (data) => {
 	return (dispatch) => {
-		// do api call then dispatch
 		axios({
 			method: 'post',
 			url: '/users',
@@ -54,6 +52,26 @@ export const startRegister = (data) => {
 					}
 				}));
 			}
+		}).catch((e) => console.log(e));
+	}
+}
+
+export const logout = () => {
+	return {
+		type: 'LOGOUT'
+	}
+}
+
+export const startLogout = () => {
+	return (dispatch, getState) => {
+		axios({
+			method: 'delete',
+			url: '/users/me/token',
+			headers: {
+				'x-auth': getState().token
+			}
+		}).then((res) => {
+			dispatch(logout());
 		}).catch((e) => console.log(e));
 	}
 }

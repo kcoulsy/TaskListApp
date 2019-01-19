@@ -15,6 +15,8 @@ export default (state = defaultAuthState, action) => {
 				token: action.token,
 				user: action.user
 			}
+		case 'LOGOUT':
+			return defaultAuthState;
 		default:
 			return state;
 	}
