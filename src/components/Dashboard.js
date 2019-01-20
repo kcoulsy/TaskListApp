@@ -3,12 +3,14 @@ import React, { Component } from 'react';
 import ContainerWithNav from '../containers/ContainerWithNav';
 import TaskListTable from './TaskListTable';
 import Modal from './Modal';
+import CreateTaskForm from './CreateTaskForm';
 
 class Dashboard extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selected: '123'
+			modalActive: true,
+			refreshList: false
 		}
 		this.clearSelected = this.clearSelected.bind(this);
 	}
@@ -17,12 +19,24 @@ class Dashboard extends Component {
 		this.setState({selected: null});
 	}
 
+	onCreate = (res) => {
+		if (this.state.modalActive) {
+			this.setState({
+				modalActive: false,
+				refreshList: !this.state.refreshList
+			});
+		}
+	}
+
 	render() {
 		return (
 			<ContainerWithNav>
 				<h3>Dashboard</h3>
-				<TaskListTable />
-				<Modal active={!!this.state.selected} onClose={this.clearSelected} />
+				<TaskListTable refresh={this.state.refreshList} />
+				<Modal
+					active={!!this.state.modalActive}
+					onClose={this.clearSelected}
+					body={<CreateTaskForm onCreate={this.onCreate}/>}/>
 			</ContainerWithNav>
 		);
 	}

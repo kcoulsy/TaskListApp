@@ -5,10 +5,19 @@ class TaskListTable extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			tasks: []
+			tasks: [],
+			refresh: false
 		}
 		this.fetchDataAndStoreInState();
 	}
+
+	componentDidUpdate() {
+		if (this.props.refresh != this.state.refresh) {
+			this.fetchDataAndStoreInState();
+			this.setState({refresh: !this.state.refresh});
+		}
+	}
+
 	fetchDataAndStoreInState = () => {
 		axios({
 			method: 'get',
@@ -17,6 +26,7 @@ class TaskListTable extends Component {
 			this.setState({tasks: res.data.tasks})
 		})
 	}
+
 	render() {
 		return (
 			<table className="table">
