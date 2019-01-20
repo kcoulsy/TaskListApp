@@ -12,7 +12,9 @@ justify-content: flex-end`;
 class CreateTaskForm extends Component {
 	state = {
 		title: '',
-		description: ''
+		description: '',
+		tag: '',
+		status: 'To Do'
 	}
 
     handleChange = (ev) => {
@@ -24,6 +26,7 @@ class CreateTaskForm extends Component {
             [name]: value
         });
     }
+
 
     createTask = () => {
 		const data = this.state;
@@ -60,6 +63,25 @@ class CreateTaskForm extends Component {
 					placeholder="Description"
 					rows="3"
 					onChange={this.handleChange} />
+				<label className="form-label" htmlFor="create-task-form-title">Tag</label>
+				<input
+					name="tag"
+					className="form-input"
+					type="text"
+					id="create-task-form-tag"
+					placeholder="Tag"
+					onChange={this.handleChange} />
+				<label className="form-label" htmlFor="create-task-form-title">Status</label>
+				<select
+					name="status"
+					className="form-select"
+					onChange={this.handleChange}>
+						<option>To Do</option>
+						<option>In Progress</option>
+						<option>Blocked</option>
+						<option>Ready for Testing</option>
+						<option>Done</option>
+				</select>
 				<FormButtonContainer>
 					<button className="btn btn-primary" onClick={this.createTask}>Create Task</button>
 				</FormButtonContainer>

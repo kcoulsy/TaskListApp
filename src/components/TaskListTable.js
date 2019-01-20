@@ -42,14 +42,18 @@ class TaskListTable extends Component {
 			<table className="table">
 				<thead>
 					<tr>
+						<th>Tag</th>
 						<th>Title</th>
+						<th>Status</th>
 						<th>Assigned To</th>
 					</tr>
 				</thead>
 				<tbody>
 					{this.state.tasks.map((task) => (
 						<tr key={task._id}>
+							<td>{task.tag && task.tag.toUpperCase()}</td>
 							<td>{task.title}</td>
+							<td>{task.status}</td>
 							<td>{task.assignedTo || 'Unassigned'}</td>
 						</tr>
 					))}
