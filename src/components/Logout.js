@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import { startLogout } from '../actions/auth';
 
 class Logout extends Component {
-	constructor(props) {
-		super(props);
-	}
 	componentDidMount = () => {
 		this.props.logout();
 	}
