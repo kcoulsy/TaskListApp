@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import Loader from './Loader';
+
 class TaskListTable extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			tasks: [],
-			refresh: false
+			refresh: false,
+			isLoading: true,
 		}
 		this.fetchDataAndStoreInState();
 	}
@@ -23,11 +26,18 @@ class TaskListTable extends Component {
 			method: 'get',
 			url: '/tasks'
 		}).then((res) => {
-			this.setState({tasks: res.data.tasks})
+			this.setState({
+				tasks: res.data.tasks,
+				isLoading: false
+			})
 		})
 	}
 
 	render() {
+		let isLoading = this.state.isLoading;
+		if (isLoading) {
+			return <Loader />
+		}
 		return (
 			<table className="table">
 				<thead>
