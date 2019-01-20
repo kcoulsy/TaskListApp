@@ -9,32 +9,38 @@ class Dashboard extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			modalActive: true,
+			createTaskModal: false,
 			refreshList: false
 		}
 		this.clearSelected = this.clearSelected.bind(this);
 	}
 
 	clearSelected = (ev) => {
-		this.setState({selected: null});
+		this.setState({createTaskModal: false});
 	}
 
 	onCreate = (res) => {
-		if (this.state.modalActive) {
+		if (this.state.createTaskModal) {
 			this.setState({
-				modalActive: false,
+				createTaskModal: false,
 				refreshList: !this.state.refreshList
 			});
 		}
+	}
+
+	openCreateTask = () => {
+		this.setState({createTaskModal: true});
 	}
 
 	render() {
 		return (
 			<ContainerWithNav>
 				<h3>Dashboard</h3>
+				<button className="btn btn-primary" onClick={this.openCreateTask}>Create Task</button>
 				<TaskListTable refresh={this.state.refreshList} />
 				<Modal
-					active={!!this.state.modalActive}
+					title="Create Task"
+					active={!!this.state.createTaskModal}
 					onClose={this.clearSelected}
 					body={<CreateTaskForm onCreate={this.onCreate}/>}/>
 			</ContainerWithNav>
