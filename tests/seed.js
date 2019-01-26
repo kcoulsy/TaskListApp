@@ -31,6 +31,7 @@ const testTasks = [{
   _id: new ObjectID(),
   title: 'This is the first task',
   description: 'This is the first task description',
+  tag: 'TEST',
   assignedTo: null,
   createdBy: testUser1Id,
   complete: true,
@@ -39,6 +40,7 @@ const testTasks = [{
 {
   _id: new ObjectID(),
   title: 'This is the second task',
+  tag: 'TEST',
   createdBy: testUser1Id,
   assignedTo: testUser2Id,
 }];

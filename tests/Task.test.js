@@ -25,6 +25,7 @@ describe('POST /task', () => {
       .set('x-auth', testUsers[0].tokens[0].token)
       .send({
         title,
+        tag: 'TEST',
       })
       .expect(200)
       .expect((res) => {

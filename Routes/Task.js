@@ -8,6 +8,8 @@ exports.create = (req, res) => {
   const task = new Task({
     title: req.body.title,
     description: req.body.description,
+    status: req.body.status,
+    tag: req.body.tag,
     createdBy: req.user._id,
   });
 
@@ -69,7 +71,7 @@ exports.delete = (req, res) => {
 
 exports.update = (req, res) => {
   const { id } = req.params;
-  const body = pick(req.body, ['title', 'description', 'assignedTo', 'complete']);
+  const body = pick(req.body, ['title', 'description', 'status', 'tag', 'assignedTo', 'complete']);
 
   if (!ObjectID.isValid(id)) {
     return res.status(404).send();

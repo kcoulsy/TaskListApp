@@ -12,6 +12,15 @@ const Task = mongoose.model('Task', {
     required: false,
     maxlength: 200,
   },
+  tag: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 5,
+  },
+  status: {
+    type: String,
+  },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -28,6 +37,7 @@ const Task = mongoose.model('Task', {
     default: null,
   },
 });
+
 module.exports = {
   Task,
 };
