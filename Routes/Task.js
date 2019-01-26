@@ -3,6 +3,7 @@ const pick = require('lodash/pick');
 
 const { ObjectID } = require('mongodb');
 const { Task } = require('./../Models/Task');
+const { User } = require('./../Models/User');
 
 exports.create = (req, res) => {
   const task = new Task({
@@ -10,6 +11,7 @@ exports.create = (req, res) => {
     description: req.body.description,
     status: req.body.status,
     tag: req.body.tag,
+    assignedTo: req.body.assignedTo,
     createdBy: req.user._id,
   });
 
@@ -22,11 +24,32 @@ exports.create = (req, res) => {
 
 exports.find = (req, res) => {
   let params = null;
-
   if (req.user) params = { createdBy: req.user._id };
 
   Task.find(params).then((tasks) => {
-    res.send({ tasks });
+    const userIds = [];
+
+    tasks.forEach((task) => {
+      if (task.assignedTo && userIds.indexOf(task.assignedTo) === -1) {
+        userIds.push(task.assignedTo);
+      }
+    });
+
+    User.find({
+      _id: {
+        $in: userIds,
+      },
+    }).then((users) => {
+      res.send({
+        users,
+        tasks,
+      });
+    }, (error) => {
+      res.send({
+        users: [],
+        tasks,
+      });
+    });
   }, (error) => {
     res.status(400).send(error);
   });
