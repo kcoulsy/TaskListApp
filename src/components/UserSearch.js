@@ -79,7 +79,7 @@ class UserSearch extends Component {
 
 	render() {
 		return (
-			<div className="form-autocomplete">
+			<div className="form-autocomplete" style={{maxHeight: 36}}>
 				<input
 				className="form-input"
 				type="text"
