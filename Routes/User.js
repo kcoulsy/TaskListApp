@@ -15,6 +15,20 @@ exports.create = (req, res) => {
 };
 
 exports.find = (req, res) => {
+  let q = pick(req.body, ['username', '_id']);
+
+  if (q.username) {
+    q.username = { $regex: `^${q.username}` };
+  }
+
+  if (q === {}) q = null;
+
+  User.find(q).then((response) => {
+    res.send(response);
+  });
+};
+
+exports.findSelf = (req, res) => {
   res.send(req.user);
 };
 
