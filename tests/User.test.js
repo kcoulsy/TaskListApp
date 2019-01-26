@@ -84,6 +84,57 @@ describe('POST /users', () => {
   });
 });
 
+describe('POST /users/find', () => {
+  it('should find all users with no params', (done) => {
+    request(app)
+      .post('/users/find')
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.length).toBe(testUsers.length);
+      })
+      .end(done);
+  });
+
+  it('should find a user by username', (done) => {
+    request(app)
+      .post('/users/find')
+      .send({
+        username: testUsers[0].username,
+      })
+      .expect(200)
+      .expect((res) => {
+        expect(res.body[0].username).toBe(testUsers[0].username);
+      })
+      .end(done);
+  });
+
+  it('should find a user by _id', (done) => {
+    request(app)
+      .post('/users/find')
+      .send({
+        _id: testUsers[0]._id,
+      })
+      .expect(200)
+      .expect((res) => {
+        expect(res.body[0]._id).toBe(testUsers[0]._id.toHexString());
+      })
+      .end(done);
+  });
+
+  it('should not find a user with invalid params', (done) => {
+    request(app)
+      .post('/users/find')
+      .send({
+        username: 'thisusernameisinvalid',
+      })
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.length).toBe(0);
+      })
+      .end(done);
+  });
+});
+
 describe('GET /users/me', () => {
   it('should return user if authenticated', (done) => {
     request(app)
