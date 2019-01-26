@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
 
+import UserSearch from './UserSearch';
+
 const FormButtonContainer = styled.div`
 width: 100%;
 padding: 10px 0;
@@ -10,11 +12,16 @@ display: flex;
 justify-content: flex-end`;
 
 class CreateTaskForm extends Component {
-	state = {
-		title: '',
-		description: '',
-		tag: '',
-		status: 'To Do'
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			title: '',
+			description: '',
+			tag: '',
+			status: 'To Do',
+			assignedTo: null,
+		}
 	}
 
     handleChange = (ev) => {
@@ -26,7 +33,6 @@ class CreateTaskForm extends Component {
             [name]: value
         });
     }
-
 
     createTask = () => {
 		const data = this.state;
@@ -44,6 +50,12 @@ class CreateTaskForm extends Component {
 			})
 		}
     }
+
+	selectUser = (data) => {
+		const userId = data && data._id || null;
+		this.setState({assignedTo: userId})
+    }
+
 	render() {
 		return (
 			<div className="form-group">
@@ -82,6 +94,8 @@ class CreateTaskForm extends Component {
 						<option>Ready for Testing</option>
 						<option>Done</option>
 				</select>
+				<label className="form-label">Assigned To</label>
+				<UserSearch selectUser={this.selectUser}/>
 				<FormButtonContainer>
 					<button className="btn btn-primary" onClick={this.createTask}>Create Task</button>
 				</FormButtonContainer>
