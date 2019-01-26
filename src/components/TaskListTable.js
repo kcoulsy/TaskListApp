@@ -8,6 +8,7 @@ class TaskListTable extends Component {
 		super(props);
 		this.state = {
 			tasks: [],
+			assignedUsers: {},
 			refresh: false,
 			isLoading: true,
 		}
@@ -15,7 +16,7 @@ class TaskListTable extends Component {
 	}
 
 	componentDidUpdate() {
-		if (this.props.refresh != this.state.refresh) {
+		if (this.props.refresh !== this.state.refresh) {
 			this.fetchDataAndStoreInState();
 			this.setState({refresh: !this.state.refresh});
 		}
@@ -28,6 +29,7 @@ class TaskListTable extends Component {
 		}).then((res) => {
 			this.setState({
 				tasks: res.data.tasks,
+				assignedUsers: res.data.users,
 				isLoading: false
 			})
 		})
@@ -49,14 +51,18 @@ class TaskListTable extends Component {
 					</tr>
 				</thead>
 				<tbody>
-					{this.state.tasks.map((task) => (
+					{this.state.tasks.map((task) => {
+						let assignedTo = task.assignedTo && this.state.assignedUsers[task.assignedTo];
+
+						return (
 						<tr key={task._id}>
 							<td>{task.tag && task.tag.toUpperCase()}</td>
 							<td>{task.title}</td>
 							<td>{task.status}</td>
-							<td>{task.assignedTo || 'Unassigned'}</td>
+							<td>{assignedTo ? (<a href="#">{assignedTo.username}</a>) : 'Unassigned'}</td>
 						</tr>
-					))}
+						)})
+					}
 				</tbody>
 			</table>
 		)
