@@ -1,0 +1,12 @@
+{
+  "test": {
+    "PORT": 3001,
+    "MONGODB_URI": "mongodb://localhost:27017/TaskListTest",
+    "JWT_SECRET": "1JFJtcMU0J"
+  },
+  "development": {
+    "PORT": 3001,
+    "MONGODB_URI": "mongodb://localhost:27017/TaskList",
+    "JWT_SECRET": "mTNns1MWDs"
+  }
+}
