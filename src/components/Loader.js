@@ -7,11 +7,11 @@ height: 100%;
 min-height: 300px;
 display: flex;
 align-items: center;
-justify-content: center;`
+justify-content: center;`;
 
-const Loader = (props) => (
-	<LoaderContainer>
-		<div className="loading loading-lg"></div>
-	</LoaderContainer>
-)
+const Loader = () => (
+  <LoaderContainer>
+    <div className="loading loading-lg" />
+  </LoaderContainer>
+);
 export default Loader;

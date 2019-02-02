@@ -13,15 +13,15 @@ import Dashboard from '../components/Dashboard';
 class AppRouter extends Component {
   render() {
     return (
-		<Router>
-			<Switch>
-				<PublicRoute path="/" exact component={Index} />
-				<PublicRoute path="/login" exact component={Login} />
-				<PublicRoute path="/register" exact component={Register} />
-				<PrivateRoute path="/dashboard" component={Dashboard} />
-				<PrivateRoute path="/logout" component={Logout} />
-			</Switch>
-		</Router>
+      <Router>
+        <Switch>
+          <PublicRoute path="/" exact component={Index} />
+          <PublicRoute path="/login" exact component={Login} />
+          <PublicRoute path="/register" exact component={Register} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/logout" component={Logout} />
+        </Switch>
+      </Router>
     );
   }
 }
