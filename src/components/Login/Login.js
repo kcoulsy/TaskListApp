@@ -1,7 +1,7 @@
 import React from 'react';
 
-import LoginForm from './LoginForm';
-import ContainerWithNav from '../containers/ContainerWithNav';
+import LoginForm from '../LoginForm/LoginForm';
+import ContainerWithNav from '../../containers/ContainerWithNav';
 
 const Login = () => (
   <ContainerWithNav>

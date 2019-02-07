@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
 
-import UserSearch from './UserSearch';
+import UserSearch from '../UserSearch/UserSearch';
 
 const ButtonContainer = styled.div`
   width: 100%;

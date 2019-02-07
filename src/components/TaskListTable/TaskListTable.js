@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import Loader from './Loader';
+import Loader from '../Loader/Loader';
 
 class TaskListTable extends Component {
   constructor(props) {
