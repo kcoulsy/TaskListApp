@@ -4,9 +4,8 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 
-import Logout from '../components/Logout/Logout';
 import Register from '../components/Register/Register';
-import { Dashboard, Home, Login } from '../pages';
+import { Dashboard, Home, Login, Logout } from '../pages';
 
 class AppRouter extends Component {
   render() {
