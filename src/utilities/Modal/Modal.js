@@ -11,27 +11,28 @@ class Modal extends Component {
   render() {
     return (
       <Portal>
-        <div className={`modal ${this.props.active && 'active'}`} id="modal-id">
+        <div
+          className={`modal ${this.props.active && 'is-active'}`}
+          id="modal-id"
+        >
           <a
             onClick={this.handleClose}
             href="#close"
-            className="modal-overlay"
+            className="modal-background"
             aria-label="Close"
           />
-          <div className="modal-container">
-            <div className="modal-header">
+          <div className="modal-content">
+            <header className="modal-card-head">
               <a
                 onClick={this.handleClose}
                 href="#close"
-                className="btn btn-clear float-right"
+                className="modal-close is-large"
                 aria-label="Close"
               />
-              <div className="modal-title h5">{this.props.title}</div>
-            </div>
-            <div className="modal-body">
-              <div className="content">{this.props.body}</div>
-            </div>
-            <div className="modal-footer">{this.props.footer}</div>
+              <p className="modal-card-title">{this.props.title}</p>
+            </header>
+            <section className="modal-card-body">{this.props.body}</section>
+            <footer className="modal-card-foot">{this.props.footer}</footer>
           </div>
         </div>
       </Portal>

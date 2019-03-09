@@ -1,28 +1,6 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { startRegister } from '../../actions/auth';
-
-const Panel = styled.div`
-  padding: 24px;
-  width: 300px;
-  height: 370px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const RegisterFormButtons = styled.div`
-  display: flex;
-  margin-top: 10px;
-  justify-content: space-around;
-`;
-
-const RegisterFormButton = styled.button`
-  flex-basis: 45%;
-`;
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -49,49 +27,55 @@ class RegisterForm extends Component {
 
   render() {
     return (
-      <Panel className="panel">
-        <h3> Register </h3>
-        <form className="form-group" onSubmit={this.handleRegister}>
-          <label className="form-label" htmlFor="emailField">
-            Email
-          </label>
-          <input
-            type="text"
-            name="email"
-            placeholder="Email"
-            onChange={this.handleChange}
-            className="form-input"
-            id="emailField"
-          />
-          <label className="form-label" htmlFor="usernameField">
-            Username
-          </label>
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            onChange={this.handleChange}
-            className="form-input"
-            id="usernameField"
-          />
-          <label className="form-label" htmlFor="passwordField">
-            Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={this.handleChange}
-            className="form-input"
-            id="passwordField"
-          />
-          <RegisterFormButtons>
-            <RegisterFormButton className="btn btn-primary" type="submit">
-              Register
-            </RegisterFormButton>
-          </RegisterFormButtons>
-        </form>
-      </Panel>
+      <div className="card">
+        <header className="card-header">
+          <p className="card-header-title"> Register </p>
+        </header>
+        <div className="card-content">
+          <form className="content" onSubmit={this.handleRegister}>
+            <div className="field">
+              <label className="label" htmlFor="usernameField">
+                Username
+              </label>
+              <div className="control">
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  onChange={this.handleChange}
+                  className="input"
+                  id="usernameField"
+                />
+              </div>
+            </div>
+            <div className="field">
+              <label className="label" htmlFor="passwordField">
+                Password
+              </label>
+              <div className="control">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                  className="input"
+                  id="passwordField"
+                />
+              </div>
+            </div>
+            <div className="field is-grouped">
+              <div className="control">
+                <button className="button is-link" type="submit">
+                  Register
+                </button>
+              </div>
+              <div className="control">
+                <button className="button is-text">Already Registered?</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     );
   }
 }

@@ -5,7 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import AppRouter from './routers/AppRouter';
 import configStore from './store/config';
 
-import '../node_modules/spectre.css/dist/spectre.css';
+import './base.scss';
 
 const { store, persistor } = configStore();
 

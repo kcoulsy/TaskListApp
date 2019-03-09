@@ -4,8 +4,12 @@ import { RegisterForm } from '../../components';
 import { ContainerWithNav } from '../../containers';
 
 const Register = () => (
-  <ContainerWithNav>
-    <RegisterForm />
+  <ContainerWithNav pageTitle="Register">
+    <div className="columns">
+      <div className="column is-two-fifths">
+        <RegisterForm />
+      </div>
+    </div>
   </ContainerWithNav>
 );
 

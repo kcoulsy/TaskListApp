@@ -1,16 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import { NavBar } from '../../components';
 
-const Container = styled.div`
-  width: 800px;
-  margin: 40px auto auto auto;
-`;
-const ContainerWithNav = ({ children }) => (
+const ContainerWithNav = ({ children, pageTitle }) => (
   <div>
     <NavBar />
-    <Container>{children}</Container>
+    {pageTitle && (
+      <section className="hero">
+        <div className="hero-body">
+          <div className="container">
+            <h1 className="title">{pageTitle}</h1>
+          </div>
+        </div>
+      </section>
+    )}
+    <div className="container is-fluid">{children}</div>
   </div>
 );
 

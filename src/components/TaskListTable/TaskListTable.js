@@ -42,7 +42,7 @@ class TaskListTable extends Component {
       return <Loader />;
     }
     return (
-      <table className="table">
+      <table className="table is-fullwidth is-striped is-bordered is-hoverable">
         <thead>
           <tr>
             <th>Tag</th>
