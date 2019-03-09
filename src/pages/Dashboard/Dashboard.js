@@ -35,8 +35,7 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <ContainerWithNav>
-        <h3>Dashboard</h3>
+      <ContainerWithNav pageTitle="Dashboard">
         <button className="btn btn-primary" onClick={this.openCreateTask}>
           Create Task
         </button>

@@ -4,7 +4,7 @@ import { LoginForm } from '../../components';
 import { ContainerWithNav } from '../../containers';
 
 const Login = () => (
-  <ContainerWithNav>
+  <ContainerWithNav pageTitle="Login">
     <div className="columns">
       <div className="column is-two-fifths">
         <LoginForm />

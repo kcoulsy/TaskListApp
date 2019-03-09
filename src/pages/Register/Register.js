@@ -4,7 +4,7 @@ import { RegisterForm } from '../../components';
 import { ContainerWithNav } from '../../containers';
 
 const Register = () => (
-  <ContainerWithNav>
+  <ContainerWithNav pageTitle="Register">
     <RegisterForm />
   </ContainerWithNav>
 );
