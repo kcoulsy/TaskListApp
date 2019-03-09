@@ -5,7 +5,11 @@ import { ContainerWithNav } from '../../containers';
 
 const Login = () => (
   <ContainerWithNav>
-    <LoginForm />
+    <div className="columns">
+      <div className="column is-two-fifths">
+        <LoginForm />
+      </div>
+    </div>
   </ContainerWithNav>
 );
 

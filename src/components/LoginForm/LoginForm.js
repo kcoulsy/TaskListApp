@@ -1,28 +1,6 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { startLogin } from '../../actions/auth';
-
-const Panel = styled.div`
-  padding: 24px;
-  width: 300px;
-  height: 320px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const LoginFormButtons = styled.div`
-  display: flex;
-  margin-top: 10px;
-  justify-content: space-around;
-`;
-
-const LoginFormButton = styled.button`
-  flex-basis: 45%;
-`;
 
 class LoginForm extends Component {
   constructor(props) {
@@ -48,38 +26,55 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <Panel className="panel">
-        <h3> Login </h3>
-        <form className="form-group" onSubmit={this.handleLogin}>
-          <label className="form-label" htmlFor="usernameField">
-            Username
-          </label>
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            onChange={this.handleChange}
-            className="form-input"
-            id="usernameField"
-          />
-          <label className="form-label" htmlFor="passwordField">
-            Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={this.handleChange}
-            className="form-input"
-            id="passwordField"
-          />
-          <LoginFormButtons>
-            <LoginFormButton className="btn btn-primary" type="submit">
-              Login
-            </LoginFormButton>
-          </LoginFormButtons>
-        </form>
-      </Panel>
+      <div className="card">
+        <header className="card-header">
+          <p className="card-header-title"> Login </p>
+        </header>
+        <div className="card-content">
+          <form className="content" onSubmit={this.handleLogin}>
+            <div className="field">
+              <label className="label" htmlFor="usernameField">
+                Username
+              </label>
+              <div className="control">
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  onChange={this.handleChange}
+                  className="input"
+                  id="usernameField"
+                />
+              </div>
+            </div>
+            <div className="field">
+              <label className="label" htmlFor="passwordField">
+                Password
+              </label>
+              <div className="control">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                  className="input"
+                  id="passwordField"
+                />
+              </div>
+            </div>
+            <div className="field is-grouped">
+              <div className="control">
+                <button className="button is-link" type="submit">
+                  Log In
+                </button>
+              </div>
+              <div className="control">
+                <button className="button is-text">Register</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     );
   }
 }
