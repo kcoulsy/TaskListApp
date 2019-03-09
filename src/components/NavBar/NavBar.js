@@ -3,36 +3,57 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const HeaderBar = styled.header`
+const HeaderBar = styled.nav`
   border-bottom: 1px solid #5755d9;
-  padding: 0 10px;
 `;
 
 const NavBar = props => (
-  <HeaderBar className="navbar">
-    <section className="navbar-section">
-      <Link to="/" className="btn btn-link">
-        Home
+  <HeaderBar className="navbar" role="navigation" aria-label="main navigation">
+    <div className="navbar-brand">
+      <Link to="/" className="navbar-item">
+        TaskListApp
       </Link>
-    </section>
-    <section className="navbar-center" />
-    {props.token ? (
-      <section className="navbar-section">
-        <span>{`Logged in as: ${props.user.username}`}</span>
-        <Link to="/logout" className="btn btn-link">
-          Logout
-        </Link>
-      </section>
-    ) : (
-      <section className="navbar-section">
-        <Link to="/login" className="btn btn-link">
-          Login
-        </Link>
-        <Link to="/register" className="btn btn-link">
-          Register
-        </Link>
-      </section>
-    )}
+      <a
+        role="button"
+        className="navbar-burger"
+        aria-label="menu"
+        aria-expanded="false"
+      >
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+      </a>
+    </div>
+    <div className="navbar-menu">
+      {props.token ? (
+        <div className="navbar-end">
+          <div className="navbar-item">
+            <span>{`Logged in as: ${props.user.username}`}</span>
+          </div>
+
+          <div className="navbar-item">
+            <div className="buttons">
+              <Link to="/logout" className="button is-light">
+                <strong>Logout</strong>
+              </Link>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="navbar-end">
+          <div className="navbar-item">
+            <div className="buttons">
+              <Link to="/register" className="button is-primary">
+                <strong>Sign up</strong>
+              </Link>
+              <Link to="/login" className="button is-light">
+                <strong>Log In</strong>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   </HeaderBar>
 );
 
