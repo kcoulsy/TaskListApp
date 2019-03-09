@@ -16,6 +16,7 @@
     "react/button-has-type": 0,
     "react/no-did-update-set-state": 0,
     "import/no-named-as-default": 0,
+    "import/prefer-default-export": 0,
     "no-underscore-dangle": 0,
     "import/imports-first": ["error", "absolute-first"],
     "import/newline-after-import": "error",

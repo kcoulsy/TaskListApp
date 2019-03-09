@@ -8,7 +8,7 @@ import Login from '../components/Login/Login';
 import Logout from '../components/Logout/Logout';
 import Register from '../components/Register/Register';
 import Home from '../components/Home/Home';
-import Dashboard from '../components/Dashboard/Dashboard';
+import { Dashboard } from '../pages';
 
 class AppRouter extends Component {
   render() {

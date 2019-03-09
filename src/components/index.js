@@ -1,5 +1,4 @@
 import CreateTaskForm from './CreateTaskForm/CreateTaskForm';
-import Dashboard from './Dashboard/Dashboard';
 import Home from './Home/Home';
 import Loader from './Loader/Loader';
 import Login from './Login/Login';
@@ -12,9 +11,8 @@ import RegisterForm from './RegisterForm/RegisterForm';
 import TaskListTable from './TaskListTable/TaskListTable';
 import UserSearch from './UserSearch/UserSearch';
 
-module.exports = {
+export {
   CreateTaskForm,
-  Dashboard,
   Home,
   Loader,
   Login,
