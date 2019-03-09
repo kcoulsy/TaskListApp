@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 
+const UsersMenu = styled.ul`
+  position: absolute;
+  background: white;
+  z-index: 5;
+  width: 100%;
+  border: 1px solid #dbdbdb;
+`;
+
+const UsersMenuItem = styled.li`
+  padding: 5px 10px;
+`;
 class UserSearch extends Component {
   constructor(props) {
     super(props);
@@ -79,43 +91,50 @@ class UserSearch extends Component {
 
   render() {
     return (
-      <div className="form-autocomplete" style={{ maxHeight: 36 }}>
-        <input
-          className="form-input"
-          type="text"
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
-          onChange={this.handleInput}
-          value={this.state.searchInput}
-          placeholder="Search User"
-        />
-        {(this.state.autoCompleteUsers.length && (
-          <ul className="menu">
-            {this.state.autoCompleteUsers.map(user => (
-              <UserSearchListItem
-                id={user._id}
-                username={user.username}
-                handleClick={this.selectUser}
-                key={user}
-              />
-            ))}
-          </ul>
-        )) ||
-          null}
+      <div className="field">
+        {this.props.label && (
+          <label className="label" htmlFor="create-task-form-tag">
+            {this.props.label}
+          </label>
+        )}
+        <div className="control">
+          <input
+            className="input"
+            type="text"
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
+            onChange={this.handleInput}
+            value={this.state.searchInput}
+            placeholder="Search User"
+          />
+          {(this.state.autoCompleteUsers.length && (
+            <UsersMenu>
+              {this.state.autoCompleteUsers.map(user => (
+                <UserSearchListItem
+                  id={user._id}
+                  username={user.username}
+                  handleClick={this.selectUser}
+                  key={user}
+                />
+              ))}
+            </UsersMenu>
+          )) ||
+            null}
+        </div>
       </div>
     );
   }
 }
 
 const UserSearchListItem = ({ id, profilePic, username, handleClick }) => (
-  <li className="menu-item" id={id}>
+  <UsersMenuItem id={id}>
     <a href="#" onClick={handleClick}>
       <div className="tile tile-centered">
         {profilePic && <div className="tile-icon">{profilePic}</div>}
         {username && <div className="tile-content">{username}</div>}
       </div>
     </a>
-  </li>
+  </UsersMenuItem>
 );
 
 export default UserSearch;

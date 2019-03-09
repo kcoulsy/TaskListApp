@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import styled from 'styled-components';
 
 import UserSearch from '../UserSearch/UserSearch';
-
-const ButtonContainer = styled.div`
-  width: 100%;
-  padding: 10px 0;
-  display: flex;
-  justify-content: flex-end;
-`;
 
 class CreateTaskForm extends Component {
   constructor(props) {
@@ -55,63 +47,79 @@ class CreateTaskForm extends Component {
 
   render() {
     return (
-      <div className="form-group">
-        <label className="form-label" htmlFor="create-task-form-title">
-          Title
-          <input
-            name="title"
-            className="form-input"
-            type="text"
-            id="create-task-form-title"
-            placeholder="Title"
-            onChange={this.handleChange}
-          />
-        </label>
-        <label className="form-label" htmlFor="create-task-form-desc">
-          Description
-          <textarea
-            name="description"
-            className="form-input"
-            id="create-task-form-desc"
-            placeholder="Description"
-            rows="3"
-            onChange={this.handleChange}
-          />
-        </label>
-        <label className="form-label" htmlFor="create-task-form-title">
-          Tag
-          <input
-            name="tag"
-            className="form-input"
-            type="text"
-            id="create-task-form-tag"
-            placeholder="Tag"
-            onChange={this.handleChange}
-          />
-        </label>
-        <label className="form-label" htmlFor="create-task-form-title">
-          Status
-          <select
-            name="status"
-            className="form-select"
-            onChange={this.handleChange}
-          >
-            <option>To Do</option>
-            <option>In Progress</option>
-            <option>Blocked</option>
-            <option>Ready for Testing</option>
-            <option>Done</option>
-          </select>
-        </label>
-        <label className="form-label">
-          Assigned To
-          <UserSearch selectUser={this.selectUser} />
-        </label>
-        <ButtonContainer>
-          <button className="btn btn-primary" onClick={this.createTask}>
-            Create Task
-          </button>
-        </ButtonContainer>
+      <div>
+        <div className="field">
+          <label className="label" htmlFor="create-task-form-title">
+            Title
+          </label>
+          <div className="control">
+            <input
+              className="input"
+              name="title"
+              type="text"
+              id="create-task-form-title"
+              placeholder="Title"
+              onChange={this.handleChange}
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label" htmlFor="create-task-form-desc">
+            Description
+          </label>
+          <div className="control">
+            <textarea
+              className="input"
+              name="description"
+              rows="3"
+              id="create-task-form-desc"
+              placeholder="Description"
+              onChange={this.handleChange}
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label" htmlFor="create-task-form-tag">
+            Tag
+          </label>
+          <div className="control">
+            <input
+              className="input"
+              name="tag"
+              type="text"
+              id="create-task-form-tag"
+              placeholder="Tag"
+              onChange={this.handleChange}
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Status</label>
+          <div className="control">
+            <div className="select">
+              <select
+                name="status"
+                className="form-select"
+                onChange={this.handleChange}
+              >
+                <option>To Do</option>
+                <option>In Progress</option>
+                <option>Blocked</option>
+                <option>Ready for Testing</option>
+                <option>Done</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <UserSearch selectUser={this.selectUser} label="Assigned To" />
+        <div className="field is-grouped">
+          <div className="control">
+            <button className="button is-link" onClick={this.createTask}>
+              Create Task
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
