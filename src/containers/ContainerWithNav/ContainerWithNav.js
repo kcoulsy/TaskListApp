@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import NavBar from '../components/NavBar/NavBar';
+import { NavBar } from '../../components';
 
 const Container = styled.div`
   width: 800px;

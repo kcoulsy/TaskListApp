@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ContainerWithNav from '../../containers/ContainerWithNav';
+import { ContainerWithNav } from '../../containers';
 import { TaskListTable, Modal, CreateTaskForm } from '../../components';
 
 class Dashboard extends Component {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ContainerWithNav from '../../containers/ContainerWithNav';
+import { ContainerWithNav } from '../../containers';
 
 const Home = () => (
   <ContainerWithNav>

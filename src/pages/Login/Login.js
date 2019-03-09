@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { LoginForm } from '../../components';
-import ContainerWithNav from '../../containers/ContainerWithNav';
+import { ContainerWithNav } from '../../containers';
 
 const Login = () => (
   <ContainerWithNav>
