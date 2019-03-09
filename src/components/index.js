@@ -1,6 +1,5 @@
 import CreateTaskForm from './CreateTaskForm/CreateTaskForm';
 import Loader from './Loader/Loader';
-import Login from './Login/Login';
 import LoginForm from './LoginForm/LoginForm';
 import Logout from './Logout/Logout';
 import Modal from './Modal/Modal';
@@ -13,7 +12,6 @@ import UserSearch from './UserSearch/UserSearch';
 export {
   CreateTaskForm,
   Loader,
-  Login,
   LoginForm,
   Logout,
   Modal,
