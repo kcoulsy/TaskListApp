@@ -1,7 +1,7 @@
 import React from 'react';
 
-import RegisterForm from '../RegisterForm/RegisterForm';
-import ContainerWithNav from '../../containers/ContainerWithNav';
+import { RegisterForm } from '../../components';
+import { ContainerWithNav } from '../../containers';
 
 const Register = () => (
   <ContainerWithNav>
