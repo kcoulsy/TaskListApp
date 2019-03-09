@@ -7,8 +7,7 @@ import PrivateRoute from './PrivateRoute';
 import Login from '../components/Login/Login';
 import Logout from '../components/Logout/Logout';
 import Register from '../components/Register/Register';
-import Home from '../components/Home/Home';
-import { Dashboard } from '../pages';
+import { Dashboard, Home } from '../pages';
 
 class AppRouter extends Component {
   render() {

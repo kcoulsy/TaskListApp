@@ -1,5 +1,4 @@
 import CreateTaskForm from './CreateTaskForm/CreateTaskForm';
-import Home from './Home/Home';
 import Loader from './Loader/Loader';
 import Login from './Login/Login';
 import LoginForm from './LoginForm/LoginForm';
@@ -13,7 +12,6 @@ import UserSearch from './UserSearch/UserSearch';
 
 export {
   CreateTaskForm,
-  Home,
   Loader,
   Login,
   LoginForm,
