@@ -18,7 +18,7 @@ Make sure your path to your development/testing MongoDB is set in ./server/confi
 Generate new JWT Keys (just needs to be random strings) and update ./server/config/config.json
 
 Install the node packages 
-> npm update && npm install
+> npm update & npm install
 
 ## Running the application
 
