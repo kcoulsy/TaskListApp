@@ -1,21 +1,23 @@
+import { AUTH_LOGIN, AUTH_REGISTER, AUTH_LOGOUT } from '../constants/auth';
+
 const defaultAuthState = {
   token: null,
-  user: {},
+  user: {}
 };
 
 export default (state = defaultAuthState, action) => {
   switch (action.type) {
-    case 'LOGIN':
+    case AUTH_LOGIN:
       return {
         token: action.token,
-        user: action.user,
+        user: action.user
       };
-    case 'REGISTER':
+    case AUTH_REGISTER:
       return {
         token: action.token,
-        user: action.user,
+        user: action.user
       };
-    case 'LOGOUT':
+    case AUTH_LOGOUT:
       return defaultAuthState;
     default:
       return state;

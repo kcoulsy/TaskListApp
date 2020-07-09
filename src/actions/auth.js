@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+import { AUTH_LOGIN, AUTH_REGISTER, AUTH_LOGOUT } from '../constants/auth';
+
 export const login = data => ({
-  type: 'LOGIN',
+  type: AUTH_LOGIN,
   ...data
 });
 
@@ -31,7 +33,7 @@ export const startLogin = data => dispatch =>
     }));
 
 export const register = data => ({
-  type: 'REGISTER',
+  type: AUTH_REGISTER,
   ...data
 });
 
@@ -62,7 +64,7 @@ export const startRegister = data => dispatch => {
 };
 
 export const logout = () => ({
-  type: 'LOGOUT'
+  type: AUTH_LOGOUT
 });
 
 export const startLogout = () => (dispatch, getState) => {

@@ -1,0 +1,5 @@
+module.exports = {
+  AUTH_LOGIN: 'AUTH_LOGIN',
+  AUTH_LOGOUT: 'AUTH_LOGOUT',
+  AUTH_REGISTER: 'AUTH_REGISTER'
+};
